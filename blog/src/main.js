@@ -1,60 +1,277 @@
-import './style.css'
-import javascriptLogo from './assets/javascript.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import { setupCounter } from './counter.js'
+// src/main.js
 
-document.querySelector('#app').innerHTML = `
-<section id="center">
-  <div class="hero">
-    <img src="${heroImg}" class="base" width="170" height="179">
-    <img src="${javascriptLogo}" class="framework" alt="JavaScript logo"/>
-    <img src="${viteLogo}" class="vite" alt="Vite logo" />
-  </div>
-  <div>
-    <h1>Get started</h1>
-    <p>Edit <code>src/main.js</code> and save to test <code>HMR</code></p>
-  </div>
-  <button id="counter" type="button" class="counter"></button>
-</section>
+import {
+  addBlog,
+  deleteBlog,
+  getBlogs,
+  updateBlog
+} from "./js/data.js";
 
-<div class="ticks"></div>
+import {
+  renderBlogList,
+  bindEvents
+} from "./js/ui.js";
 
-<section id="next-steps">
-  <div id="docs">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#documentation-icon"></use></svg>
-    <h2>Documentation</h2>
-    <p>Your questions, answered</p>
-    <ul>
-      <li>
-        <a href="https://vite.dev/" target="_blank">
-          <img class="logo" src="${viteLogo}" alt="" />
-          Explore Vite
-        </a>
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-          <img class="button-icon" src="${javascriptLogo}" alt="">
-          Learn more
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div id="social">
-    <svg class="icon" role="presentation" aria-hidden="true"><use href="/icons.svg#social-icon"></use></svg>
-    <h2>Connect with us</h2>
-    <p>Join the Vite community</p>
-    <ul>
-      <li><a href="https://github.com/vitejs/vite" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#github-icon"></use></svg>GitHub</a></li>
-      <li><a href="https://chat.vite.dev/" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#discord-icon"></use></svg>Discord</a></li>
-      <li><a href="https://x.com/vite_js" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#x-icon"></use></svg>X.com</a></li>
-      <li><a href="https://bsky.app/profile/vite.dev" target="_blank"><svg class="button-icon" role="presentation" aria-hidden="true"><use href="/icons.svg#bluesky-icon"></use></svg>Bluesky</a></li>
-    </ul>
-  </div>
-</section>
+// =============================
+// DOM Elements
+// =============================
 
-<div class="ticks"></div>
-<section id="spacer"></section>
-`
+const form = document.getElementById("blog-form");
 
-setupCounter(document.querySelector('#counter'))
+const titleInput = document.getElementById("title");
+const bodyInput = document.getElementById("body");
+const imageInput = document.getElementById("image");
+const tagsInput = document.getElementById("tags");
+
+const blogList = document.getElementById("blog-list");
+const filter = document.getElementById("filter");
+
+const submitText = document.getElementById("submit-text");
+
+// =============================
+
+let editingId = null;
+
+// =============================
+// Footer Date
+// =============================
+
+const dateEl = document.getElementById("current-date");
+
+if (dateEl) {
+
+    dateEl.textContent = new Date().toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+// =============================
+// Update Filter Dropdown
+// =============================
+
+function updateFilter(){
+
+    const tags=[
+        ...new Set(
+            getBlogs().flatMap(blog=>blog.tags||[])
+        )
+    ];
+
+    filter.innerHTML=
+    `<option value="all">All Blogs</option>`;
+
+    tags.forEach(tag=>{
+
+        const option=document.createElement("option");
+
+        option.value=tag;
+
+        option.textContent=tag;
+
+        filter.appendChild(option);
+
+    });
+
+}
+
+// =============================
+// Refresh UI
+// =============================
+
+function refresh(){
+
+    renderBlogList(
+        blogList,
+        filter.value
+    );
+
+    updateFilter();
+
+}
+
+// =============================
+// Add / Update Blog
+// =============================
+
+form.addEventListener("submit",(e)=>{
+
+    e.preventDefault();
+
+    const title=titleInput.value.trim();
+
+    const body=bodyInput.value.trim();
+
+    const image=imageInput.value.trim();
+
+    const tags=tagsInput.value
+    .split(",")
+    .map(tag=>tag.trim())
+    .filter(Boolean);
+
+    if(!title || !body){
+
+        alert("Please fill all required fields.");
+
+        return;
+
+    }
+
+    const blog={
+
+        title,
+
+        body,
+
+        image,
+
+        tags
+
+    };
+
+    if(editingId){
+
+        updateBlog(
+
+            editingId,
+
+            blog
+
+        );
+
+        editingId=null;
+
+        submitText.textContent="Add Blog";
+
+    }
+
+    else{
+
+        addBlog({
+
+            id:Date.now(),
+
+            ...blog
+
+        });
+
+    }
+
+    form.reset();
+
+    refresh();
+
+});
+
+// =============================
+// Delete & Edit
+// =============================
+
+bindEvents(
+
+blogList,
+
+(id)=>{
+
+    const confirmDelete=confirm(
+
+        "Delete this blog?"
+
+    );
+
+    if(!confirmDelete) return;
+
+    deleteBlog(id);
+
+    refresh();
+
+},
+
+(id)=>{
+
+    const blog=getBlogs().find(
+
+        blog=>blog.id===id
+
+    );
+
+    if(!blog) return;
+
+    titleInput.value=blog.title;
+
+    bodyInput.value=blog.body;
+
+    imageInput.value=blog.image||"";
+
+    tagsInput.value=(blog.tags||[]).join(",");
+
+    editingId=id;
+
+    submitText.textContent="Update Blog";
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+);
+
+// =============================
+// Filter Blogs
+// =============================
+
+filter.addEventListener("change",()=>{
+
+    renderBlogList(
+
+        blogList,
+
+        filter.value
+
+    );
+
+});
+
+// =============================
+// Theme Button
+// =============================
+
+const themeBtn=document.querySelector(".theme-btn");
+
+if(themeBtn){
+
+themeBtn.addEventListener("click",()=>{
+
+document.body.classList.toggle("dark");
+
+const icon=themeBtn.querySelector("i");
+
+if(document.body.classList.contains("dark")){
+
+icon.className="ri-sun-line";
+
+}else{
+
+icon.className="ri-moon-line";
+
+}
+
+});
+
+}
+
+// =============================
+// Initial Render
+// =============================
+
+refresh();
