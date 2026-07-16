@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog Manager</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Remix Icon -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ================= Sidebar ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="ri-quill-pen-line"></i>
+            </div>
+
+            <div>
+
+                <h2>Blog Manager</h2>
+
+                <p>Write. Manage. Inspire.</p>
+
+            </div>
+
+        </div>
+
+        <nav>
+
+            <a href="#" class="active">
+                <i class="ri-home-5-line"></i>
+                All Blogs
+            </a>
+
+            <a href="#">
+                <i class="ri-article-line"></i>
+                My Blogs
+            </a>
+
+            <a href="#">
+                <i class="ri-add-circle-line"></i>
+                Add New Blog
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <a href="#">
+                <i class="ri-information-line"></i>
+                About
+            </a>
+
+            <a href="#">
+                <i class="ri-settings-3-line"></i>
+                Settings
+            </a>
+
+            <div class="quote">
+
+                <i class="ri-double-quotes-l"></i>
+
+                <p>
+                    This is Blog Manager made by .
+                </p>
+
+                <span>
+                    — Rashmi Singh  ❤️❤️
+                </span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- ================= Main ================= -->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <h1>
+
+                <i class="ri-edit-box-line"></i>
+
+                Create New Blog
+
+            </h1>
+
+            <div class="profile">
+
+                <button class="theme-btn">
+
+                    <i class="ri-moon-line"></i>
+
+                </button>
+
+                <div class="avatar">
+                    R
+                </div>
+
+                <span>Rashmi</span>
+
+                <i class="ri-arrow-down-s-line"></i>
+
+            </div>
+
+        </header>
+
+        <!-- ================= Form ================= -->
+
+        <section class="form-card">
+
+            <form id="blog-form">
+
+                <div class="left-inputs">
+
+                    <div class="input-box">
+
+                        <i class="ri-file-text-line"></i>
+
+                        <input
+                            type="text"
+                            id="title"
+                            placeholder="Blog Title"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="ri-image-line"></i>
+
+                        <input
+                            type="text"
+                            id="image"
+                            placeholder="Image URL (optional)"
+                        >
+
+                    </div>
+
+                    <div class="input-box">
+
+                        <i class="ri-price-tag-3-line"></i>
+
+                        <input
+                            type="text"
+                            id="tags"
+                            placeholder="Tags (comma separated)"
+                        >
+
+                    </div>
+
+                    <small>
+                        Example :
+                        javascript,
+                        webdev,
+                        coding,
+                        life
+                    </small>
+
+                </div>
+
+                <div class="right-inputs">
+
+                    <div class="textarea-box">
+
+                        <i class="ri-edit-line"></i>
+
+                        <textarea
+
+                            id="body"
+
+                            placeholder="Write your blog content here..."
+
+                            required
+
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="submit-btn"
+                >
+
+                    <i class="ri-add-circle-line"></i>
+
+                    <span id="submit-text">
+                        Add Blog
+                    </span>
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- ================= Blog Section ================= -->
+
+        <section class="blogs">
+
+            <div class="blog-header">
+
+                <h2>
+
+                    <i class="ri-book-open-line"></i>
+
+                    All Blogs
+
+                </h2>
+
+                <div class="filter-box">
+
+                    <label>
+
+                        Filter by Tag :
+
+                    </label>
+
+                    <select id="filter">
+
+                        <option value="all">
+
+                            All Blogs
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div
+
+                id="blog-list"
+
+                class="blog-grid"
+
+            >
+
+                <!-- JS Render -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+<script
+type="module"
+src="/src/main.js"
+></script>
+
+</body>
+</html>
