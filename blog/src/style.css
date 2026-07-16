@@ -1,296 +1,1640 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-  margin: 0;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#edf2ff;
+    color:#222;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* ===================================================
+   VARIABLES
+=================================================== */
+
+:root{
+
+    --primary:#6C4DFF;
+    --primary-dark:#4F46E5;
+
+    --sidebar:#0d1025;
+
+    --sidebar2:#171b39;
+
+    --white:#fff;
+
+    --text:#1f2937;
+
+    --gray:#6b7280;
+
+    --border:#e5e7eb;
+
+    --bg:#f5f7ff;
+
+    --shadow:0 15px 35px rgba(0,0,0,.08);
+
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* ===================================================
+   APP LAYOUT
+=================================================== */
+
+.app{
+
+    display:flex;
+
+    min-height:100vh;
+
+    background:var(--bg);
+
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* ===================================================
+   SIDEBAR
+=================================================== */
+
+.sidebar{
+
+    width:290px;
+
+    background:linear-gradient(
+        180deg,
+        var(--sidebar),
+        var(--sidebar2)
+    );
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    padding:30px;
+
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* ===================================================
+   LOGO
+=================================================== */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:40px;
+
 }
 
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+.logo-icon{
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    background:linear-gradient(
+        135deg,
+        #6C4DFF,
+        #4F46E5
+    );
+
 }
 
-.hero {
-  position: relative;
+.logo h2{
 
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
+    font-size:30px;
 
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
+    font-weight:700;
 
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
 }
 
-#app {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+.logo p{
+
+    font-size:14px;
+
+    color:#bfc4d6;
+
+    margin-top:4px;
+
 }
 
-#center {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
+/* ===================================================
+   NAVIGATION
+=================================================== */
 
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+.sidebar nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
 }
 
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
+.sidebar nav a{
 
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
+    text-decoration:none;
+
+    color:#d7d8e7;
+
+    padding:16px 20px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:17px;
+
+    transition:.35s;
+
+}
+
+.sidebar nav a i{
+
+    font-size:22px;
+
+}
+
+.sidebar nav a:hover{
+
+    background:rgba(255,255,255,.08);
+
+}
+
+.sidebar nav .active{
+
+    background:linear-gradient(
+        135deg,
+        #4F46E5,
+        #7C5CFF
+    );
+
+    color:white;
+
+}
+
+/* ===================================================
+   SIDEBAR BOTTOM
+=================================================== */
+
+.sidebar-bottom{
+
+    margin-top:40px;
+
+}
+
+.sidebar-bottom a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#cfd4ea;
+
+    text-decoration:none;
+
+    padding:12px 0;
+
+    font-size:17px;
+
+    transition:.3s;
+
+}
+
+.sidebar-bottom a:hover{
+
+    color:white;
+
+}
+
+.sidebar-bottom a i{
+
+    font-size:20px;
+
+}
+
+/* ===================================================
+   QUOTE CARD
+=================================================== */
+
+.quote{
+
+    margin-top:40px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+.quote i{
+
+    color:#8b5cf6;
+
+    font-size:48px;
+
+}
+
+.quote p{
+
+    color:#d6d8ec;
+
+    line-height:1.8;
+
+    margin:20px 0;
+
+    font-size:16px;
+
+}
+
+.quote span{
+
+    color:#8b5cf6;
+
+    font-weight:600;
+
+}
+
+/* ===================================================
+   MAIN CONTENT
+=================================================== */
+
+.main-content{
+
+    flex:1;
+
+    padding:40px;
+
+}
+
+/* ===================================================
+   TOP HEADER
+=================================================== */
+
+.topbar{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:35px;
+
+}
+
+.topbar h1{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:38px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+.topbar h1 i{
+
+    color:#6C4DFF;
+
+}
+
+/* ===================================================
+   PROFILE
+=================================================== */
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.theme-btn{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    border:none;
+
+    background:white;
+
+    cursor:pointer;
+
+    box-shadow:var(--shadow);
+
+    font-size:20px;
+
+}
+
+.avatar{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    background:#6C4DFF;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:700;
+
+    font-size:18px;
+
+}
+
+.profile span{
+
+    font-weight:600;
+
+    color:#222;
+
+}
+
+.profile i:last-child{
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}/* ===================================================
+   FORM CARD
+=================================================== */
+
+.form-card{
+
+    background:var(--white);
+
+    border-radius:28px;
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:40px;
+
+}
+
+#blog-form{
+
+    display:grid;
+
+    grid-template-columns:1fr 1.4fr;
+
+    gap:30px;
+
+}
+
+/* ===================================================
+   LEFT INPUT SECTION
+=================================================== */
+
+.left-inputs{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.left-inputs small{
+
+    color:var(--gray);
+
+    font-size:14px;
+
+    padding-left:6px;
+
+}
+
+/* ===================================================
+   INPUT BOX
+=================================================== */
+
+.input-box{
+
+    position:relative;
+
+}
+
+.input-box i{
+
+    position:absolute;
+
+    top:50%;
+
+    left:18px;
+
+    transform:translateY(-50%);
+
+    color:var(--primary);
+
+    font-size:20px;
+
+}
+
+.input-box input{
+
+    width:100%;
+
+    height:60px;
+
+    border:2px solid #e5e7eb;
+
+    border-radius:16px;
+
+    padding-left:55px;
+
+    padding-right:20px;
+
+    font-size:16px;
+
+    font-family:inherit;
+
+    background:#fff;
+
+    transition:.35s;
+
+}
+
+.input-box input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(108,77,255,.15);
+
+}
+
+/* ===================================================
+   TEXTAREA
+=================================================== */
+
+.textarea-box{
+
+    position:relative;
+
+    height:100%;
+
+}
+
+.textarea-box i{
+
+    position:absolute;
+
+    top:22px;
+
+    left:18px;
+
+    color:var(--primary);
+
+    font-size:20px;
+
+}
+
+.textarea-box textarea{
+
+    width:100%;
+
+    height:220px;
+
+    resize:none;
+
+    border:2px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:18px 20px 20px 55px;
+
+    font-size:16px;
+
+    font-family:inherit;
+
+    line-height:1.8;
+
+    transition:.35s;
+
+    background:white;
+
+}
+
+.textarea-box textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(108,77,255,.15);
+
+}
+
+/* ===================================================
+   PLACEHOLDER
+=================================================== */
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#9ca3af;
+
+}
+
+/* ===================================================
+   SUBMIT BUTTON
+=================================================== */
+
+.submit-btn{
+
+    grid-column:1/-1;
+
+    margin-top:10px;
+
+    height:64px;
+
+    border:none;
+
+    border-radius:18px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:12px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    color:white;
+
+    background:linear-gradient(
+        90deg,
+        #4F6BFF,
+        #7C3AED
+    );
+
+    transition:.35s;
+
+    box-shadow:
+    0 12px 25px rgba(79,107,255,.30);
+
+}
+
+.submit-btn i{
+
+    font-size:24px;
+
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 18px 35px rgba(79,107,255,.40);
+
+}
+
+.submit-btn:active{
+
+    transform:scale(.98);
+
+}
+
+/* ===================================================
+   INPUT HOVER EFFECT
+=================================================== */
+
+.input-box input:hover,
+.textarea-box textarea:hover{
+
+    border-color:#c7d2fe;
+
+}
+
+/* ===================================================
+   BLOG SECTION HEADER
+=================================================== */
+
+.blogs{
+
+    width:100%;
+
+}
+
+.blog-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:25px;
+
+}
+
+.blog-header h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    font-size:32px;
+
+    color:#111827;
+
+    font-weight:700;
+
+}
+
+.blog-header h2 i{
+
+    color:var(--primary);
+
+}
+
+/* ===================================================
+   FILTER
+=================================================== */
+
+.filter-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.filter-box label{
+
+    font-size:16px;
+
+    color:#374151;
+
+    font-weight:500;
+
+}
+
+.filter-box select{
+
+    width:250px;
+
+    height:50px;
+
+    border:2px solid #d1d5db;
+
+    border-radius:14px;
+
+    padding:0 18px;
+
+    font-size:16px;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    background:white;
+
+    transition:.3s;
+
+}
+
+.filter-box select:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(108,77,255,.12);
+
+}/* ===================================================
+   BLOG GRID
+=================================================== */
+
+.blog-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:28px;
+
+}
+
+/* ===================================================
+   BLOG CARD
+=================================================== */
+
+.blog-item{
+
+    background:#fff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    position:relative;
+
+}
+
+.blog-item:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 22px 45px rgba(79,70,229,.18);
+
+}
+
+/* ===================================================
+   BLOG IMAGE
+=================================================== */
+
+.blog-img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+/* ===================================================
+   BLOG CONTENT
+=================================================== */
+
+.blog-content{
+
+    padding:24px;
+
+}
+
+.blog-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    margin-bottom:15px;
+
+}
+
+.blog-title i{
+
+    color:var(--primary);
+
+}
+
+.blog-body{
+
+    font-size:15px;
+
+    color:#6b7280;
+
+    line-height:1.8;
+
+    margin-bottom:20px;
+
+    display:-webkit-box;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+
+}
+
+/* ===================================================
+   TAGS
+=================================================== */
+
+.tags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:22px;
+
+}
+
+.tags span{
+
+    background:#eef2ff;
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    padding:8px 14px;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.tags span:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* ===================================================
+   ACTION BUTTONS
+=================================================== */
+
+.actions{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+}
+
+.actions button{
+
+    flex:1;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    transition:.3s;
+
+}
+
+/* EDIT */
+
+.edit-btn{
+
+    background:#eef2ff;
+
+    color:var(--primary);
+
+}
+
+.edit-btn:hover{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* DELETE */
+
+.delete-btn{
+
+    background:#ffe8e8;
+
+    color:#ef4444;
+
+}
+
+.delete-btn:hover{
+
+    background:#ef4444;
+
+    color:white;
+
+}
+
+/* ===================================================
+   CARD FOOTER
+=================================================== */
+
+.blog-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:20px;
+
+    padding-top:18px;
+
+    border-top:1px solid #ececec;
+
+}
+
+.blog-date{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+}
+
+.blog-date i{
+
+    color:var(--primary);
+
+}
+
+.blog-id{
+
+    font-size:13px;
+
+    color:#9ca3af;
+
+}
+
+/* ===================================================
+   EMPTY STATE
+=================================================== */
+
+.empty-state{
+
+    grid-column:1/-1;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:70px 30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+.empty-state i{
+
+    font-size:70px;
+
+    color:var(--primary);
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h3{
+
+    font-size:28px;
+
+    color:#111827;
+
+    margin-bottom:12px;
+
+}
+
+.empty-state p{
+
+    color:#6b7280;
+
+    font-size:16px;
+
+}
+
+/* ===================================================
+   SCROLLBAR
+=================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#edf2ff;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+        180deg,
+        #6C4DFF,
+        #4F46E5
+    );
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#4338ca;
+
+}
+
+/* ===================================================
+   ANIMATIONS
+=================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
     }
-  }
 
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
+    to{
 
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
-}
+        opacity:1;
 
-#docs {
-  border-right: 1px solid var(--border);
+        transform:translateY(0);
 
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
-}
-
-#next-steps ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
     }
 
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
+}
+
+.blog-item{
+
+    animation:fadeUp .5s ease;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
     }
-  }
+
+    50%{
+
+        transform:scale(1.03);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.submit-btn:hover{
+
+    animation:pulse .5s;
+
+}/* ===================================================
+   TABLET RESPONSIVE
+=================================================== */
+
+@media (max-width:1024px){
+
+    .sidebar{
+
+        width:240px;
+
+        padding:25px;
+
+    }
+
+    .logo h2{
+
+        font-size:24px;
+
+    }
+
+    .main-content{
+
+        padding:30px;
+
+    }
+
+    #blog-form{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .left-inputs,
+    .right-inputs{
+
+        width:100%;
+
+    }
+
+    .textarea-box textarea{
+
+        height:180px;
+
+    }
+
+    .blog-grid{
+
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+    }
+
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+/* ===================================================
+   MOBILE RESPONSIVE
+=================================================== */
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+@media (max-width:768px){
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+    .app{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        height:auto;
+
+        padding:20px;
+
+    }
+
+    .logo{
+
+        justify-content:center;
+
+    }
+
+    .sidebar nav{
+
+        margin-top:20px;
+
+    }
+
+    .sidebar nav a{
+
+        justify-content:center;
+
+    }
+
+    .quote{
+
+        display:none;
+
+    }
+
+    .sidebar-bottom{
+
+        margin-top:20px;
+
+    }
+
+    .sidebar-bottom a{
+
+        justify-content:center;
+
+    }
+
+    .main-content{
+
+        padding:20px;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:20px;
+
+    }
+
+    .topbar h1{
+
+        font-size:30px;
+
+    }
+
+    .profile{
+
+        width:100%;
+
+        justify-content:flex-end;
+
+    }
+
+    .form-card{
+
+        padding:20px;
+
+    }
+
+    .blog-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
+    }
+
+    .filter-box{
+
+        width:100%;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .filter-box select{
+
+        width:100%;
+
+    }
+
+    .blog-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .submit-btn{
+
+        width:100%;
+
+    }
+
+}
+
+/* ===================================================
+   SMALL MOBILE
+=================================================== */
+
+@media (max-width:480px){
+
+    body{
+
+        font-size:14px;
+
+    }
+
+    .sidebar{
+
+        padding:15px;
+
+    }
+
+    .logo{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .logo-icon{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:24px;
+
+    }
+
+    .logo h2{
+
+        font-size:22px;
+
+    }
+
+    .main-content{
+
+        padding:15px;
+
+    }
+
+    .topbar h1{
+
+        font-size:24px;
+
+    }
+
+    .profile{
+
+        gap:10px;
+
+    }
+
+    .avatar{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .theme-btn{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .input-box input{
+
+        height:54px;
+
+        font-size:15px;
+
+    }
+
+    .textarea-box textarea{
+
+        height:160px;
+
+        font-size:15px;
+
+    }
+
+    .submit-btn{
+
+        height:56px;
+
+        font-size:17px;
+
+    }
+
+    .blog-item{
+
+        border-radius:18px;
+
+    }
+
+    .blog-content{
+
+        padding:18px;
+
+    }
+
+    .blog-title{
+
+        font-size:20px;
+
+    }
+
+    .blog-body{
+
+        font-size:14px;
+
+    }
+
+    .actions{
+
+        flex-direction:column;
+
+    }
+
+    .actions button{
+
+        width:100%;
+
+    }
+
+}
+
+/* ===================================================
+   IMAGE LOADING EFFECT
+=================================================== */
+
+.blog-img{
+
+    transition:.4s;
+
+}
+
+.blog-item:hover .blog-img{
+
+    transform:scale(1.05);
+
+}
+
+/* ===================================================
+   INPUT ANIMATION
+=================================================== */
+
+input,
+textarea,
+select{
+
+    transition:.3s ease;
+
+}
+
+/* ===================================================
+   CARD ANIMATION
+=================================================== */
+
+.blog-item{
+
+    animation:fadeUp .5s ease both;
+
+}
+
+/* ===================================================
+   BUTTON RIPPLE EFFECT
+=================================================== */
+
+button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+button::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.35);
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    transition:.45s;
+
+}
+
+button:active::after{
+
+    width:220px;
+
+    height:220px;
+
+}
+
+/* ===================================================
+   SELECTION COLOR
+=================================================== */
+
+::selection{
+
+    background:#6C4DFF;
+
+    color:white;
+
+}
+
+/* ===================================================
+   FOCUS ACCESSIBILITY
+=================================================== */
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus{
+
+    outline:none;
+
+}
+
+/* ===================================================
+   SMOOTH TRANSITIONS
+=================================================== */
+
+a,
+button,
+input,
+textarea,
+select,
+.blog-item,
+.tags span{
+
+    transition:all .3s ease;
+
 }
